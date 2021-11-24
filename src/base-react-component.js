@@ -1,3 +1,8 @@
+/** @jsxImportSource theme-ui */
+
+import { ThemeProvider, } from 'theme-ui'
+import { funk } from '@theme-ui/presets'
+
 import ReactDOM from 'react-dom';
 import React from 'react';
 
@@ -48,7 +53,11 @@ export default (editor) => {
       },
 
       mountReact(cmp, el) {
-        ReactDOM.render(cmp, el);
+        ReactDOM.render(
+          <ThemeProvider theme={funk}>
+            {cmp}
+          </ThemeProvider>, 
+          el);
       },
 
       render() {

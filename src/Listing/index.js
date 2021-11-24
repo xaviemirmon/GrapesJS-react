@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Card, Text } from 'theme-ui';
+ 
 class Listing extends React.Component {
   constructor(props) {
     super();
@@ -29,6 +30,9 @@ class Listing extends React.Component {
         <div>Mlsid: {mlsid}</div>
         <div>{children}</div>
         <div>Counter: {counter}</div>
+        <Card>
+          <Text>Card</Text>
+        </Card>
       </div>
     );
   }
