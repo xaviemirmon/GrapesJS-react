@@ -11,7 +11,7 @@ import ReactComponents from './react-components';
 import MuiComponents from './mui-components';
 
 import { ThemeProvider, Link, Card} from 'theme-ui'
-import { system } from '@theme-ui/presets'
+import { tosh } from '@theme-ui/presets'
 
 
 
@@ -251,7 +251,7 @@ editor.runCommand('sw-visibility');
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={system}>
+    <ThemeProvider theme={tosh}>
       <Index />
     </ThemeProvider>
   </React.StrictMode>,
