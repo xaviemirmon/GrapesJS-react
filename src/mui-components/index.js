@@ -1,7 +1,7 @@
-import React from 'react';
-import { create } from 'jss';
-import { StylesProvider, jssPreset } from '@material-ui/styles';
-import { Button, Slider, SnackbarContent } from '@material-ui/core';
+import React from "react";
+import { create } from "jss";
+import { StylesProvider, jssPreset } from "@material-ui/styles";
+import { Button, Slider, SnackbarContent } from "@material-ui/core";
 
 export default (editor) => {
   const { Blocks, Components } = editor;
@@ -10,12 +10,12 @@ export default (editor) => {
   // Helper for MUI components
   const addCmp = ({ type, component, props }) => {
     Components.addType(type, {
-      extend: 'react-component',
+      extend: "react-component",
       model: {
         defaults: {
           ...props,
-          component
-        }
+          component,
+        },
       },
       view: {
         /**
@@ -33,64 +33,63 @@ export default (editor) => {
               sheetsManager,
               jss: create({
                 plugins: [...jssPreset().plugins],
-                insertionPoint: this.em.get('Canvas').getDocument().head
-              })
+                insertionPoint: this.em.get("Canvas").getDocument().head,
+              }),
             },
             cmpMain
           );
-        }
+        },
       },
-      isComponent: (el) => el.tagName === type.toUpperCase()
+      isComponent: (el) => el.tagName === type.toUpperCase(),
     });
 
     Blocks.add(type, {
       label: type,
-      category: 'MUI',
-      content: { type }
+      category: "MUI",
+      content: { type },
     });
-    
   };
 
   addCmp({
-    type: 'MuiButton',
+    type: "MuiButton",
     component: Button,
     props: {
       attributes: {
-        color: 'primary',
-        variant: 'contained'
+        color: "primary",
+        variant: "contained",
       },
-      components: 'Click me',
+      components: "Click me",
       traits: [
         {
-          type: 'select',
-          label: 'Variant',
-          name: 'variant',
+          type: "select",
+          label: "Variant",
+          name: "variant",
           options: [
-            { value: 'contained', name: 'Contained' },
-            { value: 'outlined', name: 'Outlined' }
-          ]
+            { value: "contained", name: "Contained" },
+            { value: "outlined", name: "Outlined" },
+          ],
         },
 
         {
-          type: 'checkbox',
-          label: 'Disabled',
-          name: 'disabled'
+          type: "checkbox",
+          label: "Disabled",
+          name: "disabled",
         },
         {
-          type: 'select',
-          label: 'Color',
-          name: 'color',
+          type: "select",
+          label: "Color",
+          name: "color",
           options: [
-            { value: 'primary', name: 'Primary' },
-            { value: 'secondary', name: 'Secondary' }
-          ]
-        }
-      ]
-    }
+            { value: "primary", name: "Primary" },
+            { value: "secondary", name: "Secondary" },
+          ],
+        },
+      ],
+    },
   });
 
   addCmp({
-    type: 'Slider',
+    type: "Slider",
     component: Slider,
     props: {
       stylable: false,
@@ -98,34 +97,34 @@ export default (editor) => {
       void: true,
       attributes: {
         min: 0,
-        max: 100
+        max: 100,
       },
       traits: [
         {
-          type: 'number',
-          label: 'Min',
-          name: 'min'
+          type: "number",
+          label: "Min",
+          name: "min",
         },
         {
-          type: 'number',
-          label: 'Max',
-          name: 'max'
-        }
-      ]
-    }
+          type: "number",
+          label: "Max",
+          name: "max",
+        },
+      ],
+    },
   });
 
   addCmp({
-    type: 'Snackbar',
+    type: "Snackbar",
     component: (props) =>
       React.createElement(SnackbarContent, {
         ...props,
-        message: props.children
+        message: props.children,
       }),
     props: {
       stylable: true,
       editable: true,
-      traits: []
-    }
+      traits: [],
+    },
   });
 };

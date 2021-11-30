@@ -1,9 +1,8 @@
-import Listing from './Listing';
-
+import Listing from "./Listing";
 
 export default (editor) => {
-  editor.Components.addType('Listing', {
-    extend: 'react-component',
+  editor.Components.addType("Listing", {
+    extend: "react-component",
     model: {
       defaults: {
         component: Listing,
@@ -13,24 +12,24 @@ export default (editor) => {
         draggable: true,
         droppable: true,
         attributes: {
-          mlsid: 'Default MLSID',
-          editable: true
+          mlsid: "Default MLSID",
+          editable: true,
         },
         traits: [
           {
-            type: 'number',
-            label: 'MLS ID',
-            name: 'mlsid'
-          }
-        ]
-      }
+            type: "number",
+            label: "MLS ID",
+            name: "mlsid",
+          },
+        ],
+      },
     },
-    isComponent: (el) => el.tagName === 'LISTING'
+    isComponent: (el) => el.tagName === "LISTING",
   });
 
-  editor.BlockManager.add('listing', {
+  editor.BlockManager.add("listing", {
     label: "<div class='gjs-fonts gjs-f-b1'>Listing</div>",
-    category: 'React Components',
-    content: '<Listing>Foo</Listing>'
+    category: "React Components",
+    content: "<Listing>Foo</Listing>",
   });
 };

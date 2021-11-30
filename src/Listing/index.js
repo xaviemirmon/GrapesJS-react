@@ -1,17 +1,17 @@
-import React from 'react';
- 
+import React from "react";
+
 class Listing extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      counter: 0
+      counter: 0,
     };
   }
 
   updateCounter() {
     const { counter } = this.state;
     this.setState({
-      counter: counter + 1
+      counter: counter + 1,
     });
   }
 
