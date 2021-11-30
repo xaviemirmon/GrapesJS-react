@@ -16,14 +16,6 @@ import * as themes from '@theme-ui/presets'
 const Index = () => {
   
   useEffect(() => {
-
-    const arrStyleSheets = document.querySelectorAll('[data-emotion]');
-    let strStyleSheets = ''
-    
-    arrStyleSheets.forEach( e => {
-      strStyleSheets += e.innerText
-    })
-
     const editor = grapesjs.init({
       container  : '#gjs2',
       height: '100%',
@@ -114,6 +106,13 @@ editor.on('load', () => {
 editor.runCommand('sw-visibility');
 
 const canvas = editor.Canvas;
+
+const arrStyleSheets = document.querySelectorAll('[data-emotion]');
+let strStyleSheets = ''
+
+arrStyleSheets.forEach( e => {
+  strStyleSheets += e.innerText
+})
 
 const head = canvas.getDocument().head;
 console.log(head, 'head')
@@ -221,7 +220,7 @@ console.log(editor.getConfig())
         </div>
 
         <div>
-          <Card><Text>Foo</Text></Card>
+          <Card sx={{maxWidth: `256px`}}><Text>Foo</Text></Card>
         </div>
 
         <footer

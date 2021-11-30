@@ -20,6 +20,7 @@ export default (editor) => {
          * We need this in order to render MUI styles in the canvas
          */
         createReactEl(cmp, props) {
+          console.log(cmp)
           return React.createElement(
             cmp,
             props,
@@ -41,6 +42,7 @@ export default (editor) => {
     type: 'Card',
     component: (props) =>
         React.createElement(Card, {
+          sx: {maxWidth: `256px`},
           ...props
         }),
     props: {
