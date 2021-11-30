@@ -1,9 +1,12 @@
+/** @jsxImportSource theme-ui */
+
 import React from 'react';
 import { Card, Switch, Text } from 'theme-ui';
+import { CardVertical } from './Card';
+import { ButtonGeneric as Button } from './Button'
 
 export default (editor) => {
   const { Blocks, Components } = editor;
-  const sheetsManager = new Map();
 
   // Helper for MUI components
   const addCmp = ({ type, component, props }) => {
@@ -19,14 +22,7 @@ export default (editor) => {
         /**
          * We need this in order to render MUI styles in the canvas
          */
-        createReactEl(cmp, props) {
-          console.log(cmp)
-          return React.createElement(
-            cmp,
-            props,
-            this.createReactChildWrap()
-          );
-        }
+        
       },
       isComponent: (el) => el.tagName === type.toUpperCase()
     });
@@ -41,8 +37,7 @@ export default (editor) => {
   addCmp({
     type: 'Card',
     component: (props) =>
-        React.createElement(Card, {
-          sx: {maxWidth: `256px`},
+        React.createElement(CardVertical, {
           ...props
         }),
     props: {
@@ -51,6 +46,50 @@ export default (editor) => {
       traits: [],
       components: 'Foo',
     }
+  });
+  addCmp({
+    type: 'Button',
+    component: (props) =>
+        React.createElement(Button, {
+          ...props
+        }),
+        props: {
+          attributes: {
+            variant: "primary",
+          },
+          components: "Click me",
+          traits: [
+            {
+              type: "select",
+              label: "Variant",
+              name: "variant",
+              options: [
+                { value: "contained", name: "Contained" },
+                { value: "outlined", name: "Outlined" },
+              ],
+            },
+            {
+              type: "text",
+              label: "Button text",
+              name: "text",
+              placeholder: 'Insert text'
+            },
+            {
+              type: "checkbox",
+              label: "Disabled",
+              name: "disabled",
+            },
+            {
+              type: "select",
+              label: "Color",
+              name: "variant",
+              options: [
+                { value: "primary", name: "Primary" },
+                { value: "secondary", name: "Secondary" },
+              ],
+            },
+          ],
+        },
   });
   addCmp({
     type: 'Switch',

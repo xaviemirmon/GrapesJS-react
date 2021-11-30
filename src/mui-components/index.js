@@ -53,12 +53,13 @@ export default (editor) => {
   addCmp({
     type: "MuiButton",
     component: Button,
+    editable: true,
     props: {
       attributes: {
         color: "primary",
         variant: "contained",
+        text: 'Click me'
       },
-      components: "Click me",
       traits: [
         {
           type: "select",
@@ -69,7 +70,12 @@ export default (editor) => {
             { value: "outlined", name: "Outlined" },
           ],
         },
-
+        {
+          type: "text",
+          label: "Button text",
+          name: "text",
+          placeholder: 'Insert text'
+        },
         {
           type: "checkbox",
           label: "Disabled",
