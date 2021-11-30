@@ -7,21 +7,27 @@ import grapesjs from 'grapesjs';
 import Basics from 'grapesjs-blocks-basic';
 
 import BaseReactComponent from './base-react-component';
-import ReactComponents from './react-components';
-import MuiComponents from './mui-components';
+// import ReactComponents from './react-components';
+import ThemeUiComponents from './theme-ui-components';
 
-import { ThemeProvider, Link, Card} from 'theme-ui'
-import { tosh } from '@theme-ui/presets'
-
-
-
+import { ThemeProvider, Link, Card, Text } from 'theme-ui'
+import * as themes from '@theme-ui/presets'
 
 const Index = () => {
+  
   useEffect(() => {
+
+    const arrStyleSheets = document.querySelectorAll('[data-emotion]');
+    let strStyleSheets = ''
+    
+    arrStyleSheets.forEach( e => {
+      strStyleSheets += e.innerText
+    })
+
     const editor = grapesjs.init({
       container  : '#gjs2',
       height: '100%',
-      fromElement: true,
+      fromElement: false,
       storageManager: { 
         id: 'gjs-',             // Prefix identifier that will be used inside storing and loading
         type: 'local',          // Type of the storage
@@ -29,11 +35,12 @@ const Index = () => {
         autoload: true,         // Autoload stored data on init
         stepsBeforeSave: 1,     // If autosave enabled, indicates how many changes are necessary before store method is triggered
         storeComponents: true,  // Enable/Disable storing of components in JSON format
-        storeStyles: true,      // Enable/Disable storing of rules in JSON format
-        storeHtml: true,        // Enable/Disable storing of components as HTML string
-        storeCss: true,         // Enable/Disable storing of rules as CSS string
+        storeStyles: false,      // Enable/Disable storing of rules in JSON format
+        storeHtml: false,        // Enable/Disable storing of components as HTML string
+        storeCss: false,         // Enable/Disable storing of rules as CSS string
       },
-      plugins: [Basics, BaseReactComponent, ReactComponents, MuiComponents],
+      storageManager: false,
+      plugins: [Basics, BaseReactComponent, ThemeUiComponents],
       blockManager: {
         appendTo: '#blocks'
       },
@@ -98,12 +105,21 @@ editor.on('load', () => {
     bm.get('column3').set('category', ''),
     bm.get('text').set('category', ''),
     bm.get('image').set('category', ''),
-    bm.get('card').set('category', '')
+    bm.get('Card').set('attributes', {class:'fa fa-square'}),
+    bm.get('Card').set('category', '')
   ])
 });
 
+
 editor.runCommand('sw-visibility');
-    
+
+const canvas = editor.Canvas;
+
+const head = canvas.getDocument().head;
+head.insertAdjacentHTML('beforeend', `<style>` + strStyleSheets +`</style>`)
+
+
+console.log(editor.getConfig())  
   
   });
   return (
@@ -199,14 +215,13 @@ editor.runCommand('sw-visibility');
           </div>
         </header>
         <div id="gjs2" style={{overflow: `hidden`}}>
-          <div data-gjs-name="Text1">
-            Text 1
-          </div>
-          <div data-gjs-name="Text2">
-            Text 2
-          </div>
-          <Card>Foo</Card>
+
         </div>
+
+        <div>
+          <Card><Text>Foo</Text></Card>
+        </div>
+
         <footer
           sx={{
             fontSize: 1,
@@ -247,11 +262,12 @@ editor.runCommand('sw-visibility');
 
     </>
   )
+
 } 
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={tosh}>
+    <ThemeProvider theme={ themes.tosh }>
       <Index />
     </ThemeProvider>
   </React.StrictMode>,

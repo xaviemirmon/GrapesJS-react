@@ -2,7 +2,6 @@ import React from 'react';
 import { create } from 'jss';
 import { StylesProvider, jssPreset } from '@material-ui/styles';
 import { Button, Slider, SnackbarContent } from '@material-ui/core';
-import { Card, Switch } from 'theme-ui';
 
 export default (editor) => {
   const { Blocks, Components } = editor;
@@ -49,11 +48,7 @@ export default (editor) => {
       category: 'MUI',
       content: { type }
     });
-    Blocks.add(type, {
-      label: type,
-      category: 'Theme UI',
-      content: { type }
-    });
+    
   };
 
   addCmp({
@@ -129,18 +124,6 @@ export default (editor) => {
       }),
     props: {
       stylable: true,
-      editable: true,
-      traits: []
-    }
-  });
-  addCmp({
-    type: 'Switch',
-    component: (props) =>
-        React.createElement(Switch, {
-          ...props
-        }),
-    props: {
-      stylable: false,
       editable: true,
       traits: []
     }
