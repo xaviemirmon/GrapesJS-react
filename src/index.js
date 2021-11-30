@@ -270,7 +270,9 @@ console.log(editor.getConfig())
 
 
 const cache = createCache({
-  key: 'gjs'
+  key: 'gjs',
+  prepend: true, // ymmv
+  speedy: false
 })
 
 ReactDOM.render(
