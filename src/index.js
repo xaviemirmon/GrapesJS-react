@@ -12,6 +12,8 @@ import ThemeUiComponents from './theme-ui-components';
 
 import { ThemeProvider, Link, Card, Text } from 'theme-ui'
 import * as themes from '@theme-ui/presets'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 
 const Index = () => {
   
@@ -266,11 +268,18 @@ console.log(editor.getConfig())
 
 } 
 
+
+const cache = createCache({
+  key: 'gjs'
+})
+
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={ themes.tosh }>
-      <Index />
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={ themes.tosh }>
+        <Index />
+      </ThemeProvider>
+    </CacheProvider>
   </React.StrictMode>,
   document.getElementById("root")
 )
