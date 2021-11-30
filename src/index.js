@@ -15,7 +15,7 @@ import * as themes from "@theme-ui/presets";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
-import { Header } from "./theme-ui-components/Header";
+import { HeaderA2 as Header } from "./theme-ui-components/Header";
 import { Footer } from "./theme-ui-components/Footer";
 import { CardVertical } from "./theme-ui-components/Card";
 
@@ -23,7 +23,6 @@ const Index = () => {
   useEffect(() => {
     const editor = grapesjs.init({
       container: "#gjs2",
-      height: "100%",
       fromElement: false,
       storageManager: {
         id: "gjs-", // Prefix identifier that will be used inside storing and loading
