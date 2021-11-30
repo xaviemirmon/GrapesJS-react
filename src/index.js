@@ -116,6 +116,8 @@ editor.runCommand('sw-visibility');
 const canvas = editor.Canvas;
 
 const head = canvas.getDocument().head;
+console.log(head, 'head')
+console.log(strStyleSheets, 'styles')
 head.insertAdjacentHTML('beforeend', `<style>` + strStyleSheets +`</style>`)
 
 
