@@ -12,18 +12,12 @@ import ThemeUiComponents from './theme-ui-components';
 
 import { ThemeProvider, Link, Card, Text } from 'theme-ui'
 import * as themes from '@theme-ui/presets'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 
 const Index = () => {
   
   useEffect(() => {
-
-    const arrStyleSheets = document.querySelectorAll('[data-emotion]');
-    let strStyleSheets = ''
-    
-    arrStyleSheets.forEach( e => {
-      strStyleSheets += e.innerText
-    })
-
     const editor = grapesjs.init({
       container  : '#gjs2',
       height: '100%',
@@ -115,7 +109,16 @@ editor.runCommand('sw-visibility');
 
 const canvas = editor.Canvas;
 
+const arrStyleSheets = document.querySelectorAll('[data-emotion]');
+let strStyleSheets = ''
+
+arrStyleSheets.forEach( e => {
+  strStyleSheets += e.innerText
+})
+
 const head = canvas.getDocument().head;
+console.log(head, 'head')
+console.log(strStyleSheets, 'styles')
 head.insertAdjacentHTML('beforeend', `<style>` + strStyleSheets +`</style>`)
 
 
@@ -219,7 +222,7 @@ console.log(editor.getConfig())
         </div>
 
         <div>
-          <Card><Text>Foo</Text></Card>
+          <Card sx={{maxWidth: `256px`}}><Text>Foo</Text></Card>
         </div>
 
         <footer
@@ -265,11 +268,20 @@ console.log(editor.getConfig())
 
 } 
 
+
+const cache = createCache({
+  key: 'gjs',
+  prepend: true, // ymmv
+  speedy: false
+})
+
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={ themes.system }>
-      <Index />
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={ themes.system }>
+        <Index />
+      </ThemeProvider>
+    </CacheProvider>
   </React.StrictMode>,
   document.getElementById("root")
 )
