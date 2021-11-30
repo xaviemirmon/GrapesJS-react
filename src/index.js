@@ -267,7 +267,7 @@ console.log(editor.getConfig())
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={ themes.tosh }>
+    <ThemeProvider theme={ themes.system }>
       <Index />
     </ThemeProvider>
   </React.StrictMode>,
