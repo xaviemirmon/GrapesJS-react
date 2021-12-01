@@ -1,5 +1,7 @@
 /** @jsxImportSource theme-ui */
 
+import './disable-speedy'
+
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
@@ -188,6 +190,7 @@ const Index = () => {
         <div id="blocks"></div>
         <Header />
         <div id="gjs2"></div>
+        <CardVertical />
         <Footer />
       </div>
 
@@ -200,18 +203,18 @@ const Index = () => {
   );
 };
 
-const cache = createCache({
-  key: "gjs",
-  speedy: false,
-});
 
-ReactDOM.render(
-  <React.StrictMode>
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={themes.system}>
-        <Index />
-      </ThemeProvider>
-    </CacheProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const App = () => (
+  <ThemeProvider theme={themes.system}>
+    <Index />
+  </ThemeProvider>
+)
+
+const root = document.getElementById('root')
+
+// Check if the root node has any children to detect if the app has been prerendered
+if (root.hasChildNodes()) {
+  ReactDOM.hydrate(<App />, root)
+} else {
+  ReactDOM.render(<App />, root)
+}
